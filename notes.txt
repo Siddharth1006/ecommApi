@@ -43,3 +43,15 @@ https://stackoverflow.com/questions/23344320/there-isnt-anything-to-compare-noth
 
 Git Merge and Push Error:
 https://stackoverflow.com/questions/13597494/git-merge-and-push
+
+Remember:
+
+[05:59:24 pm] siddharth@Cinnamon: [/home/siddharth/Desktop/Projects/ecommApi]  (main ✓)
+  ▶  git push
+fatal: The current branch main has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin main
+
+
+
