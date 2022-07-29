@@ -26,3 +26,20 @@ and then "echo \"Error: no test specified\" && exit 1" to "nodemon index.js"
 Step3:
 Go to terminal and type : $ npm start  => nodemon is in action! If you make any edits, nodemon will
 automatically "hot-reload" the application!
+
+
+//========================================================
+
+Git Issues I faced:
+------------------
+
+https://www.thegeekstuff.com/2019/03/git-create-dev-branch-and-merge/ 
+
+After creating repository, I tried to push, but github says compare and pull request. 
+When I see there, there isn't anything to compare. Its the first pull request. 
+So Solution:
+
+https://stackoverflow.com/questions/23344320/there-isnt-anything-to-compare-nothing-to-compare-branches-are-entirely-diffe
+
+Git Merge and Push Error:
+https://stackoverflow.com/questions/13597494/git-merge-and-push
