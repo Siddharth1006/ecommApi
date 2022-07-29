@@ -1,0 +1,28 @@
+//Installation done using npm.
+
+1. Install Express.
+$ npm install express <Enter>
+
+2. Install MonogDb
+Link: https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/
+
+Now install mongoose :
+https://www.npmjs.com/package/mongoose
+
+3. Install nodemon
+Link: https://www.npmjs.com/package/nodemon
+(Installed globally so its not showing in package.json file)
+
+4.Install dotenv
+Link: https://www.npmjs.com/package/dotenv 
+
+Step2:
+We will be using nodemon to continuosly hot reload the changed/edited file, save it and runs the app automatically.
+
+For that, go to package.json > "scripts" > "test" and change test to "start".
+and then "echo \"Error: no test specified\" && exit 1" to "nodemon index.js"
+
+
+Step3:
+Go to terminal and type : $ npm start  => nodemon is in action! If you make any edits, nodemon will
+automatically "hot-reload" the application!
