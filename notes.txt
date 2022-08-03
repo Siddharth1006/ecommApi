@@ -40,7 +40,7 @@ Mongoose and MongoDb References:
 https://www.freecodecamp.org/news/introduction-to-mongoose-for-mongodb-d2a7aa593c57/ 
 https://www.mongodb.com/developer/languages/javascript/mongoose-versus-nodejs-driver/ 
 
-Now to connect to MongoDB database
+Step 4: Now to connect to MongoDB database
 We create an account on cloud.mongodb.com
 Then we create a free cluster. 
 Assign Ip address as 0.0.0.0 => means every server can access the db from anywhere in the world.
@@ -62,6 +62,10 @@ mongoose.connect(process.env.MONGO_URL)
 In the url , you need to change the username , password and database name. Otherwise it wont get connected.
 
 Routes - to create RestApi so we will be using endpoints.
+
+
+NOTE: If you are using Crypto js library then we need to install it.
+$ npm install crypto-js
 
 //========================================================
 
@@ -106,7 +110,7 @@ And Git tells you to import new changes from REMOTE and merge it with your code 
 You can use this command to force changes to the server with the local repository (). 
 remote repo code will be replaced with your local repo code.
 
-$ git push -f origin master
+$ git push -f origin main
 
 Git fetch vs pull?
 =================
