@@ -13,7 +13,7 @@ router.get("/usertest" , (req , res) => {
 //body is the body that is being passed to the server
 //then print.
 //To check we can use POSTMAN or Thunder clinet
-router.post("userposttest" , (req , res) => {
+router.post("/userposttest" , (req , res) => {
     const username = req.body.username
     console.log(username);
 })

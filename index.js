@@ -26,6 +26,8 @@ app.get('/api/test', () => {
   console.log('Test is SUCCESSFUL!')
 })
 
+//To parse json objects as input
+app.use(express.json());
 //This means that whenever we go to the API end point /api/user , the application will use userRoute.
 app.use("/api/users" , userRoute);
 
