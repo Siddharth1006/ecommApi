@@ -8,7 +8,8 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 //instead of having all end points of here in the page,
 // we are using a separate file for each route to user , productetc.
-const userRoute = require('./routes/users')
+const userRoute = require('./routes/user')
+const authRoute = require('./routes/auth')
 
 dotenv.config()
 //To connect to our MongoDB Database
@@ -30,7 +31,8 @@ app.get('/api/test', () => {
 //To parse json objects as input
 app.use(express.json())
 //This means that whenever we go to the API end point /api/user , the application will use userRoute.
-app.use('/api/users', userRoute)
+app.use('/api/user', userRoute)
+app.use('/api/auth', authRoute)
 
 //=============================================================
 //Port to see and listen to our runnning application

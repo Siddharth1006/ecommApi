@@ -88,6 +88,31 @@ To push the current branch and set the remote as upstream, use
 
     git push --set-upstream origin main
 
+[05:20:36 pm] siddharth@Cinnamon: [/home/siddharth/Desktop/Projects/ecommApi]  (main → origin ↑1 ↓1 ✓)
+  ▶  git push
+To https://github.com/Siddharth1006/ecommApi.git
+ ! [rejected]        main -> main (non-fast-forward)
+error: failed to push some refs to 'https://github.com/Siddharth1006/ecommApi.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+Soln: 
+"The tip of your current branch is behind its remote counterpart"* means that there have been changes on the 
+remote branch that you don’t have locally. 
+And Git tells you to import new changes from REMOTE and merge it with your code and then push it to remote.
+
+You can use this command to force changes to the server with the local repository (). 
+remote repo code will be replaced with your local repo code.
+
+$ git push -f origin master
+
+Git fetch vs pull?
+=================
+Git Fetch is the command that tells the local repository that there are changes available in the remote repository without bringing the changes into the local repository. 
+Git Pull on the other hand brings the copy of the remote directory changes into the local repository
+
 REMEMBER THIS:
 -------------
 https://stackoverflow.com/questions/8196544/what-are-the-git-concepts-of-head-master-origin
@@ -100,4 +125,5 @@ https://www.networkwebcams.co.uk/blog/2010/02/17/network-port-and-why-do-i-need-
 
 https://www.lifewire.com/port-numbers-on-computer-networks-817939
 https://www.techtarget.com/searchnetworking/definition/port-number 
+
 
