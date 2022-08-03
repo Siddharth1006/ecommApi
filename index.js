@@ -6,9 +6,9 @@ const app = express()
 const mongoose = require('mongoose')
 //importing the dotenv file for fetching the secure url for connection to database
 const dotenv = require('dotenv') 
-
+//instead of having all end points of here in the page,
+// we are using a separate file for each route to user , productetc.
 const userRoute = require('./routes/user')
-
 
 dotenv.config()
 //To connect to our MongoDB Database
@@ -19,11 +19,18 @@ mongoose
     console.log(err); //prints the error
   })
 
+//=========================================================
 
+//ENDPOINTS:
 app.get('/api/test', () => {
   console.log('Test is SUCCESSFUL!')
 })
 
+//This means that whenever we go to the API end point /api/user , the application will use userRoute.
+app.use("/api/user" , userRoute);
+
+
+//=============================================================
 //Port to see and listen to our runnning application
 //If no port number in env file then start it at Port number : 5000
 app.listen(process.env.PORT || 5000, () => {
