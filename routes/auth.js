@@ -49,6 +49,10 @@ router.post("/login", async (req, res) => {
         // then just return 401 error
         OriginalPassword !== InputPassword && res.status(401).json("Wrong Credentials")
 
+        //Basically we can pass in any property. We are gonna pass in id and idAdmin property inside
+        // our token. So, if we try to delete a user, then if id in json webtoken == userid then 
+        //user belongs to our client and they can delete/update the user.
+        //Also , admin can do that.
         const accessToken = jwt.sign(
             {
                 id: searchUser._id,

@@ -67,6 +67,13 @@ Routes - to create RestApi so we will be using endpoints.
 NOTE: If you are using Crypto js library then we need to install it.
 $ npm install crypto-js
 
+Install jwt - jsonwebtoken (For extra security during login)
+$ npm install jsonwebtoken
+
+HIGHLY IMPORTANT NOTE : Whenever you are adding a user, make sure the PASSWORD_SEC_KEY is constant. 
+Also, if you decide to change it,
+then, delete all the users and add them once again with the new PASSWORD_SEC_KEY. Same goes with JWT_SEC_KEY.
+
 //========================================================
 
 Git Issues I faced:
