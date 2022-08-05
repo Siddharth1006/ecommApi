@@ -9,17 +9,16 @@ const router = require("express").Router()
 
 //CREATE
 
-router.post("/" , async (req , res) => {
+router.post("/", async (req, res) => {
     const newProduct = new Product(req.body)
 
     try {
-        const savedProduct = await newProduct.save();
-        res.status(200).json(savedProduct);
+        const savedProduct = await newProduct.save()
+        res.status(200).json(savedProduct)
+    } catch (err) {
+        res.status(500).json(err)
     }
-    catch(err) {
-        res.status(500).json(err);
-    }
-});
+})
 
 //UPDATE
 router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
@@ -31,43 +30,58 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
             },
             { new: true }
         )
-        res.status(200).json(updatedProduct);
+        res.status(200).json(updatedProduct)
     } catch (err) {
         res.status(500).json(err)
     }
 })
 
-// //DELETE
-// router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
-//     try {
-//         await User.findByIdAndDelete(req.params.id)
-//         res.status(200).json("User has been deleted...")
-//     } catch (err) {
-//         res.status(500).json(err)
-//     }
-// })
+//DELETE
+router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+    try {
+        await User.findByIdAndDelete(req.params.id)
+        res.status(200).json("Product has been deleted...")
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
 
-// //GET USER
-// router.get("/find/:id", verifyTokenAndAdmin, async (req, res) => {
-//     try {
-//         const user = await User.findById(req.params.id)
-//         const { password, ...others } = user._doc
-//         res.status(200).json(others)
-//     } catch (err) {
-//         res.status(500).json(err)
-//     }
-// })
+//GET PRODUCT
+// All users and admin can access product
+router.get("/find/:id", async (req, res) => {
+    try {
+        const product = await User.findById(req.params.id)
+        res.status(200).json(product)
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
 
-// //GET ALL USER
-// router.get("/", verifyTokenAndAdmin, async (req, res) => {
-//     const query = req.query.new
-//     try {
-//         const users = query ? await User.find().sort({ _id: -1 }).limit(5) : await User.find()
-//         res.status(200).json(users)
-//     } catch (err) {
-//         res.status(500).json(err)
-//     }
-// })
+//GET ALL USER
+router.get("/", async (req, res) => {
+    //We can fetch products by their created date.
+    const qNew = req.query.new;
+    //OR
+    //We can fetch products by their category
+    const qCategory = req.query.category;  // Categories query
+    try {
+        let products;
+        if(qNew) {
+            products = await Product.find().sort({created : -1}).limit(5);
+        }
+        else if(qCategory){
+            //if categories query is inside the Product.js array, we are gonna just 
+            //fetch those products.
+            //how to do?
+            products = await Product.find({ categories });
+        }
+
+
+        res.status(200).json(users)
+    } catch (err) {
+        res.status(500).json(err)
+    }
+})
 
 // //GET USER STATS
 
