@@ -128,6 +128,10 @@ REMEMBER THIS:
 -------------
 https://stackoverflow.com/questions/8196544/what-are-the-git-concepts-of-head-master-origin
 
+ERRORS:
+
+throw new TypeError('Router.use() requires a middleware function but got a ' + gettype(fn))
+Ans : https://stackoverflow.com/questions/27465850/typeerror-router-use-requires-middleware-function-but-got-a-object
 
 Why ports?
 =========

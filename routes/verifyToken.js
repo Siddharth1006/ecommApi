@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken")
 
 const verifyToken = (req, res, next) => {
-    const authHeader = req.headers.token;
+    const authHeader = req.headers.token
     if (authHeader) {
         //verify function
         //If verified you have 2 options:
@@ -16,9 +16,9 @@ const verifyToken = (req, res, next) => {
             }
             req.user = user // just like req.body , req.header etc.
             next() // leaves this function and goes to root in user.js => router.put()
-        });
+        })
     } else {
-        return res.status(401).json("You are NOT AUTHENTICATED!");
+        return res.status(401).json("You are NOT AUTHENTICATED!")
     }
 }
 
@@ -35,11 +35,15 @@ const verifyTokenAndAuthorization = (req, res, next) => {
 const verifyTokenAndAdmin = (req, res, next) => {
     verifyToken(req, res, () => {
         if (req.user.isAdmin) {
-            next();
+            next()
         } else {
             res.status(403).json("You are not alowed to do that!")
         }
     })
 }
 
-module.exports = { verifyTokenAndAuthorization , verifyTokenAndAdmin  , verifyToken }
+module.exports = {
+    verifyTokenAndAuthorization,
+    verifyTokenAndAdmin,
+    verifyToken,
+}

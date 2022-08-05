@@ -12,7 +12,10 @@ router.post("/register", async (req, res) => {
         username: req.body.username,
         email: req.body.email,
         //To encrypt Password
-        password: CryptoJS.AES.encrypt(req.body.password, process.env.PASSWORD_SEC_KEY).toString(),
+        password: CryptoJS.AES.encrypt(
+            req.body.password,
+            process.env.PASSWORD_SEC_KEY
+        ).toString(),
     })
 
     try {
@@ -47,10 +50,11 @@ router.post("/login", async (req, res) => {
 
         // If the password that was found IS NOT SAME AS THE password mapped to the given username
         // then just return 401 error
-        OriginalPassword !== InputPassword && res.status(401).json("Wrong Credentials")
+        OriginalPassword !== InputPassword &&
+            res.status(401).json("Wrong Credentials")
 
         //Basically we can pass in any property. We are gonna pass in id and idAdmin property inside
-        // our token. So, if we try to delete a user, then if id in json webtoken == userid then 
+        // our token. So, if we try to delete a user, then if id in json webtoken == userid then
         //user belongs to our client and they can delete/update the user.
         //Also , admin can do that.
         const accessToken = jwt.sign(
@@ -68,6 +72,7 @@ router.post("/login", async (req, res) => {
     } catch (err) {
         res.status(500).json(err)
         //500 status code for error
+        return
     }
 })
 
