@@ -9,7 +9,7 @@ const router = require("express").Router();
 
 //CREATE
 
-router.post("/", async (req, res) => {
+router.post("/", verifyToken, async (req, res) => {
     const newOrder = new Order(req.body);
 
     try {
@@ -21,7 +21,6 @@ router.post("/", async (req, res) => {
 });
 
 //UPDATE
-//Only admin can update so tokenandadmin
 router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
     try {
         const updatedOrder = await Order.findByIdAndUpdate(
@@ -39,7 +38,7 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
 
 //DELETE
 //User and Admin can delete order
-router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
+router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
     try {
         await Order.findByIdAndDelete(req.params.id);
         res.status(200).json("Order has been deleted...");
@@ -48,21 +47,33 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
     }
 });
 
-//GET ALL
-router.get("/", verifyTokenAndAdmin, async (req, res) => {
+//GET USER ORDERS
+router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
     try {
-        const orders = await Cart.find();
+        const orders = await Order.find({ userId: req.params.userId });
         res.status(200).json(orders);
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
+//GET ALL
+router.get("/", verifyTokenAndAdmin, async (req, res) => {
+    try {
+        const orders = await Order.find();
+        res.status(200).json(orders);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+// GET MONTHLY INCOME
 //STATS = GET MONTHLY INCOME
 router.get("/income", verifyTokenAndAdmin, async (req, res) => {
     const date = new Date();
+
     //We are going to compare this month and last month incomes.
-    const lastYear = new Date(date.setMonth(date.getMonth() - 1));
+    const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
     const previousMonth = new Date(
         new Date().setMonth(lastMonth.getMonth() - 1)
     );
@@ -75,13 +86,14 @@ router.get("/income", verifyTokenAndAdmin, async (req, res) => {
                     month: { $month: "$createdAt" },
                     sales: "$amount",
                 },
+            },
+            {
                 $group: {
                     _id: "$month",
-                    total: { $sum: "$sales" }
+                    total: { $sum: "$sales" },
                 },
             },
         ]);
-
         res.status(200).json(income);
     } catch (err) {
         res.status(500).json(err);

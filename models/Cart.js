@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 //Every user has one cart
 const CartSchema = new mongoose.Schema(
@@ -16,7 +16,7 @@ const CartSchema = new mongoose.Schema(
             },
         ],
     },
-    { timestamps: true },
-)
+    { timestamps: true }
+);
 
-module.exports = mongoose.model('Cart', CartSchema);
+module.exports = mongoose.model("Cart", CartSchema);

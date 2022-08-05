@@ -1,10 +1,11 @@
 const Cart = require("../models/Cart");
-const router = require("express").Router();
 const {
     verifyToken,
     verifyTokenAndAuthorization,
     verifyTokenAndAdmin,
 } = require("./verifyToken");
+
+const router = require("express").Router();
 
 //CREATE
 router.post("/", verifyToken, async (req, res) => {
@@ -48,7 +49,7 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
 // All users and admin can access the cart
 router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
     try {
-        const cart = await Cart.findBy({ userId: req.params.userId });
+        const cart = await Cart.findOne({ userId: req.params.userId });
         res.status(200).json(cart);
     } catch (err) {
         res.status(500).json(err);
