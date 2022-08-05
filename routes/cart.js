@@ -18,11 +18,10 @@ router.post("/", verifyToken, async (req, res) => {
     }
 });
 
-
 //UPDATE
 router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
     try {
-        const updatedCart = await User.findByIdAndUpdate(
+        const updatedCart = await Cart.findByIdAndUpdate(
             req.params.id,
             {
                 $set: req.body,
@@ -34,56 +33,36 @@ router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
         res.status(500).json(err);
     }
 });
-/*
+
 //DELETE
-router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
     try {
-        await User.findByIdAndDelete(req.params.id);
-        res.status(200).json("Product has been deleted...");
+        await Cart.findByIdAndDelete(req.params.id);
+        res.status(200).json("Cart has been deleted...");
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
-//GET PRODUCT
-// All users and admin can access product
-router.get("/find/:id", async (req, res) => {
+//GET USER CART
+// All users and admin can access the cart
+router.get("/find/:id", verifyTokenAndAuthorization, async (req, res) => {
     try {
-        const product = await User.findById(req.params.id);
-        res.status(200).json(product);
+        const cart = await Cart.findBy({ userId: req.params.userId });
+        res.status(200).json(cart);
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
-//GET ALL USERS
-router.get("/", async (req, res) => {
-    //We can fetch products by their created date.
-    const qNew = req.query.new;
-    //OR
-    //We can fetch products by their category
-    const qCategory = req.query.category; // Categories query
+//GET ALL
+router.get("/", verifyTokenAndAdmin, async (req, res) => {
     try {
-        let products;
-        if (qNew) {
-            products = await Product.find().sort({ createdAt: -1 }).limit(5);
-        } else if (qCategory) {
-            //if categories query is inside the Product.js array, we are gonna just
-            //fetch those products.
-            //This is how to do:
-            products = await Product.find({
-                categories: {
-                    $in: [qCategory],
-                },
-            });
-        } else {
-            products = await Product.find();
-        }
-        res.status(200).json(products);
+        const carts = await Cart.find();
+        res.status(200).json(carts);
     } catch (err) {
         res.status(500).json(err);
     }
 });
-*/
 
 module.exports = router;
