@@ -46,7 +46,7 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
 
 //GET USER CART
 // All users and admin can access the cart
-router.get("/find/:id", verifyTokenAndAuthorization, async (req, res) => {
+router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
     try {
         const cart = await Cart.findBy({ userId: req.params.userId });
         res.status(200).json(cart);

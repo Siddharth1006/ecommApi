@@ -11,6 +11,7 @@ const dotenv = require("dotenv");
 const userRoute = require("./routes/user");
 const authRoute = require("./routes/auth");
 const productRoute = require("./routes/product");
+const cartRoute = require("./routes/cart");
 
 dotenv.config();
 //To connect to our MongoDB Database
@@ -32,9 +33,10 @@ app.get("/api/test", () => {
 //To parse json objects as input
 app.use(express.json());
 //This means that whenever we go to the API end point /api/user , the application will use userRoute.
-app.use("/api/user", userRoute);
+app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/products", productRoute);
+app.use("/api/carts" , cartRoute);
 
 //=============================================================
 //Port to see and listen to our runnning application
