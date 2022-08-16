@@ -74,6 +74,12 @@ HIGHLY IMPORTANT NOTE : Whenever you are adding a user, make sure the PASSWORD_S
 Also, if you decide to change it,
 then, delete all the users and add them once again with the new PASSWORD_SEC_KEY. Same goes with JWT_SEC_KEY.
 
+FOR STRIPE:
+==========
+Login to your account.
+Go to Developers(Top right) > API Keys > Copy the secret and key and paste it in env file.
+The secret key is used in the backend for the creator and the for theusers in the frontend , we use the "publishable" key
+
 //========================================================
 
 Git Issues I faced:
